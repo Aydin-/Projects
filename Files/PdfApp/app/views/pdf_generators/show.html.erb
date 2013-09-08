@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @pdf_generator.url %>
+</p>
+
+<p>
+  <strong>Filepath:</strong>
+  <%= @pdf_generator.filepath %>
+</p>
+
+<p>
+  <strong>Fd1:</strong>
+  <%= @pdf_generator.fd1 %>
+</p>
+
+<p>
+  <strong>Fd2:</strong>
+  <%= @pdf_generator.fd2 %>
+</p>
+
+<%= link_to 'Edit', edit_pdf_generator_path(@pdf_generator) %> |
+<%= link_to 'Back', pdf_generators_path %>

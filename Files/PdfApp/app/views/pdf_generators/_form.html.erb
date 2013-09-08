@@ -1,0 +1,24 @@
+<%= form_for(@pdf_generator) do |f| %>
+  <% if @pdf_generator.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pdf_generator.errors.count, "error") %> prohibited this pdf_generator from being saved:</h2>
+
+      <ul>
+      <% @pdf_generator.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :url %><br>
+    <%= f.text_field :url %>
+  </div>
+<label for="upload_file">Select File</label> : 
+<%= file_field 'upload', 'datafile' %></p>
+
+  <div class="actions">
+    <%= f.submit "Create PDF" %>
+  </div>
+<% end %>

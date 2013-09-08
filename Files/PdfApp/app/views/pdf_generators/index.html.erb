@@ -1,0 +1,33 @@
+<h1>Listing pdf_generators</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Url</th>
+      <th>Filepath</th>
+      <th>Fd1</th>
+      <th>Fd2</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pdf_generators.each do |pdf_generator| %>
+      <tr>
+        <td><%= pdf_generator.url %></td>
+        <td><%= pdf_generator.filepath %></td>
+        <td><%= pdf_generator.fd1 %></td>
+        <td><%= pdf_generator.fd2 %></td>
+        <td><%= link_to 'Show', pdf_generator %></td>
+        <td><%= link_to 'Edit', edit_pdf_generator_path(pdf_generator) %></td>
+        <td><%= link_to 'Destroy', pdf_generator, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pdf generator', new_pdf_generator_path %>
