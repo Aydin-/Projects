@@ -1,3 +1,5 @@
+# Solution by Aydin Gungordu - www.aydingungordu.com
+
 require "pdfkit"
 require "nokogiri"
 require "open-uri"
