@@ -4,13 +4,12 @@
 
 class Collatz
     def main
-
+         print "Enter a integer: "
        input = gets
         
-        if input.is_i?
-            print 'got integer '
-        else
-         print 'Enter only an integer value, n > 1. '
+        while !input.is_i? do
+            print 'Enter only an integer value, n > 1: '
+            input = gets
         end
 
         n=input.to_i

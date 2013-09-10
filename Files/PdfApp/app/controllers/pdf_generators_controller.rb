@@ -31,6 +31,7 @@ class PdfGeneratorsController < ApplicationController
   # POST /pdf_generators.json
   def create
     @pdf_generator = PdfGenerator.new(pdf_generator_params)
+  #  save(params['upload'])
 #    kit = PDFKit.new(@pdf_generator.url)
    if @pdf_generator.url.length>5
       options = { :margin => "1cm"}
@@ -40,6 +41,15 @@ class PdfGeneratorsController < ApplicationController
     end
     send_file 'output.pdf'
 
+  end
+
+  def save(upload)
+    name =  upload['datafile']
+    directory = "./"
+    # create the file path
+    path = File.join(directory, name)
+    # write the file
+    File.open(path, "wb") { |f| f.write(upload['datafile']) }
   end
 
   # PATCH/PUT /pdf_generators/1
