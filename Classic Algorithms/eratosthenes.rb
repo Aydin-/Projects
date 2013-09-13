@@ -1,21 +1,3 @@
-n = gets.chomp.to_i
-
-array= Array.new(n, true)
-
-while p<Math::sqrt(n) do
-
-	i=p
-	
-	while (i<=n) do
-		array[i] = false # not a prime
-		i+=p
-	end
-
-	while array[p]!=true do
-		p++
-	end
-
-end
 
 #Input: an integer n > 1
  
@@ -28,6 +10,33 @@ end
    #   A[j] := false
  
 #Now all i such that A[i] is true are prime.
+
+# why doesn't this produce the correct results?
+
+n = gets.chomp.to_i
+
+int_array= Array.new(n, true)
+
+i=2
+i2=2
+
+while (i < Math.sqrt(n)) do
+
+	if int_array[i]==true
+		j=i2
+		while (j<=n) do
+			int_array[j] = false # not a prime
+			j+=i
+		end
+	end
+	i+=1
+end
+puts "Prime numbers:"
+int_array.each_with_index {|val, index| 
+if index > 2
+	puts "#{val} => #{index}" 
+end
+}
 
 
 
