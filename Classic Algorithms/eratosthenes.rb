@@ -1,4 +1,6 @@
 
+# Sieve of Eratosthenes
+
 #Input: an integer n > 1
  
 #Let A be an array of Boolean values, indexed by integers 2 to n,

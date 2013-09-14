@@ -1,3 +1,5 @@
+# Solution by Aydin Gungordu - www.aydingungordu.com
+
 class BinaryConverter
     def main
 	print "Enter binary number:"
