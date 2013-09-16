@@ -98,12 +98,11 @@ end
 
 root=BSTnode.new(1)
 bst=BST.new(root)
+r = Random.new
 
-bst.insert(BSTnode.new(-1))
-
-bst.insert(BSTnode.new(0))
-
-bst.insert(BSTnode.new(4))
+50.times {
+	bst.insert(BSTnode.new(r.rand(-100...100)))
+}
 
 puts "\nIn order: "
 bst.traverse_in_order(root) { |node| puts node.data.to_s}
@@ -117,6 +116,6 @@ if bst.isBalanced?
 	puts "This is a balanced tree."
 else
 	puts "This is not a balanced tree"
-
+end
 
 
