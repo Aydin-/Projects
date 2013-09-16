@@ -20,13 +20,15 @@ class EightQueens
 	@@Queens=Array.new
 
 	def buildSolutions
-
-
+		8.times do |col|
+			insertNextSafe(col)
+		end
+		printBoard
 	end
 
 	def insertQueen(col,row)
 		@@chessboard.send(:[]=,col,row,"Q")
-		@@numQueens++
+		@@numQueens+=1
 		@@Queens.push([col,row])
 
 	end
@@ -37,16 +39,25 @@ class EightQueens
 		@@numQueens=0
 	end
 
-	def insertNextSafe()
-		while(@@numQueens<8) do
-
-
-
+	def insertNextSafe(col)
+		inserted=false
+		8.times do |row|
+			if(canInsert?(col,row))
+				insertQueen(col,row)
+				inserted=true
+			end
 		end
 
-		#insertQueen(col,row)
-		printBoard
-		
+		if(!inserted)
+			backTrack
+			insertNextSafe
+		end
+	end
+
+	def backTrack
+		toRemove=@@Queens.pop
+		print "To remove: "
+		puts toRemove
 	end
 
 	def printBoard
@@ -66,9 +77,9 @@ class EightQueens
 	end
 
 	def canInsert?(col,row)
-	#	puts rowSafe?(row)
-	#	puts colSafe?(col)
-	#	puts diagonalSafe?(col,row)
+		puts rowSafe?(row)
+		puts colSafe?(col)
+		puts diagonalSafe?(col,row)
 
 		return rowSafe?(row) && colSafe?(col) && diagonalSafe?(col,row)
 	end
@@ -97,7 +108,50 @@ class EightQueens
 	end
 
 	def diagonalSafe?(col,row)
-		true #
+		checkCol=col
+		checkRow=row
+
+		while checkRow<8 && checkCol<8 do
+			checkRow+=1
+			checkCol+=1
+			if @@chessboard[checkCol,checkRow].eql?("Q")
+				return false
+			end
+		end
+		
+		checkCol=col
+		checkRow=row
+
+		while checkRow>=0 && checkCol<8 do
+			checkRow-=1
+			checkCol+=1
+			if @@chessboard[checkCol,checkRow].eql?("Q")
+				return false
+			end
+		end
+		
+		checkCol=col
+		checkRow=row
+
+		while checkRow<8 && checkCol>=0 do
+			checkRow+=1
+			checkCol-=1
+			if @@chessboard[checkCol,checkRow].eql?("Q")
+				return false
+			end
+		end
+		
+		checkCol=col
+		checkRow=row
+
+		while checkRow>=0 && checkCol>=0 do
+			checkRow-=1
+			checkCol-=1
+			if @@chessboard[checkCol,checkRow].eql?("Q")
+				return false
+			end
+		end
+		return true
 	end
 
 end
