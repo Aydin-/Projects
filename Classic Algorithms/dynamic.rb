@@ -14,50 +14,28 @@ end
 
 #Write an algorithm to print all ways of arranging eight queens on an 8x8 chess board so that none of them 
 #share the same row, column or diagonal. In this case, "diagonal" means all diagonals, not just the two that bisect the board.
+
+# Does not work.
+
 class EightQueens
 	@@numQueens=0
 	@@chessboard=Matrix.build(8, 8) {|row, col| "." }
 	@@Queens=Array.new
 
-	def buildSolutions
-		8.times do |col|
-			insertNextSafe(col)
-		end
-		printBoard
-	end
-
-	def insertQueen(col,row)
-		@@chessboard.send(:[]=,col,row,"Q")
-		@@numQueens+=1
-		@@Queens.push([col,row])
-
-	end
-
-	def initialize
-		@@chessboard=Matrix.build(8, 8) {|row, col| "." }
-		@@Queens=Array.new
-		@@numQueens=0
-	end
-
-	def insertNextSafe(col)
-		inserted=false
-		8.times do |row|
-			if(canInsert?(col,row))
-				insertQueen(col,row)
-				inserted=true
+	def placeQueens(row)
+		gridsize = 8
+	
+		if (row== gridsize) 
+			 "FOUND RESULT!" 
+			 printBoard
+		else
+			gridsize.times do |col|
+				if(canInsert?(col,row))
+					@@chessboard.send(:[]=,col,row,"Q")
+					placeQueens(row + 1);
+				end
 			end
 		end
-
-		if(!inserted)
-			backTrack
-			insertNextSafe
-		end
-	end
-
-	def backTrack
-		toRemove=@@Queens.pop
-		print "To remove: "
-		puts toRemove
 	end
 
 	def printBoard
@@ -157,6 +135,6 @@ class EightQueens
 end
 
 eq=EightQueens.new
-eq.buildSolutions
+eq.placeQueens(0)
 
 	
