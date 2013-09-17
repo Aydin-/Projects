@@ -1,0 +1,13 @@
+<%= form_for(@progress_web) do |f| %>
+ Enter URL: 
+<br>
+  <div class="field">
+    <%= f.text_field :url %>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="actions">
+    <%= f.submit "Download file"%>
+  </div>
+<% end %>

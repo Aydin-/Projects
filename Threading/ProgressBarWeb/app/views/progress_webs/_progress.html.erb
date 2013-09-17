@@ -1,0 +1,19 @@
+<script>
+$(document).ready(
+  function(){
+  
+    setInterval(function(){
+       test();
+    }, 500);
+  });
+
+  function test() {
+    $( "#progressbar" ).progressbar({
+    value: <%=progress_int%>
+    });
+  };
+</script>
+<%= "Download is "+progress_int+"% complete"%>
+<input style="display:none" id="progress_value" value="<%=progress_int%>"/>
+
+<div class="span8 progress progress-striped active"><div id="bar" class="bar" style="width: 80%;"></div></div>

@@ -1,0 +1,17 @@
+<script>
+$(document).ready(
+  function(){
+  
+    setInterval(function(){
+       $('#container').load('/progress_webs/new');
+    }, 3000);
+  });
+
+
+</script>
+<%= render 'form' %>
+  <div id="container"> </div>
+  <div id="progressbar"></div>
+ 
+
+

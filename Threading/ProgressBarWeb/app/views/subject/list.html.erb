@@ -1,0 +1,13 @@
+<h1>Listing Subjects</h1>
+<ul id="subject_list">
+<!--% @subjects.each do |c| %-->
+<%= "(#{@subjects})" -%></li>
+<!--% end %-->
+</ul>
+
+<div id="add_subject" style="display:none;">
+<%=	form_tag { :action => 'create', :id => 'subject_form'}, :remote => true, :method => :get %>
+
+<%= submit_tag 'Add' %>
+<%= end_form_tag %>
+</div>
