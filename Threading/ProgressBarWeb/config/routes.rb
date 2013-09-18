@@ -1,9 +1,9 @@
 ProgressBarWeb::Application.routes.draw do
 
-    resources :progress_webs do
+  resources :progress_webs do
   member do
     get :stream
-    get :progress
+    get :updateProgress
   end
 end
 
@@ -13,7 +13,7 @@ end
   # You can have the root of your site routed with "root"
  root 'progress_webs#index'
  
-  match 'stream', to: 'progress_webs#stream', via: 'get'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

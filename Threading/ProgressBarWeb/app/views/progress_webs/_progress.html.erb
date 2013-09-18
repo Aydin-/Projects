@@ -13,7 +13,9 @@ $(document).ready(
     });
   };
 </script>
-<%= "Download is "+progress_int+"% complete"%>
+<%= "Download is "+progress_int+"% complete, "+done_int+"KB downloaded"%>
 <input style="display:none" id="progress_value" value="<%=progress_int%>"/>
+<br>
+<%= "Time elapsed "+elapsed_int+" seconds"%>
 
 <div class="span8 progress progress-striped active"><div id="bar" class="bar" style="width: 80%;"></div></div>

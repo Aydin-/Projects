@@ -16,8 +16,9 @@ layout "application"
     @progress_web=ProgressWeb.new
   end
 
- def progress
- end
+  def updateProgress
+    puts "UPDATE PROGRESS!"
+  end
 
   # GET /progress_webs/1
   # GET /progress_webs/1.json
@@ -25,16 +26,25 @@ layout "application"
     puts "Downloading %s" % @@clonePW['url'].to_s
     @@thread = download(@@clonePW['url'].to_s)
     @progress_web=@@clonePW
+    @@start = Time.now
+
   end
 
   # GET /progress_webs/new
   def new
-   # stream
-    @@test= "%.2f" % @@thread[:progress].to_f 
-    render :partial => "progress", :locals => { :progress_int => @@test }
-    puts "getting"
+    if( @@test.eql?("100.00"))
+         puts "DOWNLOAD COMPLETE"
+         @@thread.exit
+         render :partial => "complete", :locals => { :progress_int => @@test, :done_int =>@@done, :elapsed_int =>@@elapsed_int }
+      return
+    end
 
-   
+    @@test= "%.2f" % @@thread[:progress].to_f 
+    @@done= "%d" % @@thread[:done] 
+    now = Time.now
+    elapsed =now - @@start
+    @@elapsed_int="%d" % elapsed
+    render :partial => "progress", :locals => { :progress_int => @@test, :done_int =>@@done, :elapsed_int =>@@elapsed_int }
   end
 
   def download(url)
@@ -44,15 +54,15 @@ layout "application"
       url = URI.parse url
       Net::HTTP.new(url.host, url.port).request_get(url.path) do |response|
         length = thread[:length] = response['Content-Length'].to_i
-         
         response.read_body do |fragment|
           body << fragment
           thread[:done] = (thread[:done] || 0) + fragment.length
           thread[:progress] = thread[:done].quo(length) * 100
         end
       end
+    
     end
-end
+  end
 
 
   # GET /progress_webs/1/edit
@@ -66,11 +76,11 @@ end
     @@clonePW=@progress_web
     respond_to do |format|
       if @progress_web.save
+
         format.html { redirect_to @progress_web, notice: 'Progress web was successfully created.' }
       #  format.json { render action: 'show', status: :created, location: @progress_web }
       else
-        format.html { render action: 'new' }
-        format.json { render json: @progress_web.errors, status: :unprocessable_entity }
+         puts "FAILED"
       end
     end
   end
