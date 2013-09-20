@@ -5,7 +5,7 @@ class ProgressWebsController < ApplicationController
 layout "application"
  include ActionController::Live
   
-  before_action :set_progress_web, only: [:edit, :update, :destroy]
+  before_action :set_progress_web, only: [:edit, :destroy]
   @@thread
   @@test=0
   @@clonePW
@@ -16,9 +16,6 @@ layout "application"
     @progress_web=ProgressWeb.new
   end
 
-  def updateProgress
-    puts "UPDATE PROGRESS!"
-  end
 
   # GET /progress_webs/1
   # GET /progress_webs/1.json
@@ -28,23 +25,6 @@ layout "application"
     @progress_web=@@clonePW
     @@start = Time.now
 
-  end
-
-  # GET /progress_webs/new
-  def new
-    if( @@test.eql?("100.00"))
-         puts "DOWNLOAD COMPLETE"
-         @@thread.exit
-         render :partial => "complete", :locals => { :progress_int => @@test, :done_int =>@@done, :elapsed_int =>@@elapsed_int }
-      return
-    end
-
-    @@test= "%.2f" % @@thread[:progress].to_f 
-    @@done= "%d" % @@thread[:done] 
-    now = Time.now
-    elapsed =now - @@start
-    @@elapsed_int="%d" % elapsed
-    render :partial => "progress", :locals => { :progress_int => @@test, :done_int =>@@done, :elapsed_int =>@@elapsed_int }
   end
 
   def download(url)
@@ -64,6 +44,9 @@ layout "application"
     end
   end
 
+  def new
+    update
+  end
 
   # GET /progress_webs/1/edit
   def edit
@@ -88,15 +71,19 @@ layout "application"
   # PATCH/PUT /progress_webs/1
   # PATCH/PUT /progress_webs/1.json
   def update
-    respond_to do |format|
-      if @progress_web.update(progress_web_params)
-        format.html { redirect_to @progress_web, notice: 'Progress web was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @progress_web.errors, status: :unprocessable_entity }
-      end
+   if( @@test.eql?("100.00"))
+         puts "DOWNLOAD COMPLETE"
+         @@thread.exit
+         render :partial => "complete", :locals => { :progress_int => @@test, :done_int =>@@done, :elapsed_int =>@@elapsed_int }
+      return
     end
+
+    @@test= "%.2f" % @@thread[:progress].to_f 
+    @@done= "%d" % @@thread[:done] 
+    now = Time.now
+    elapsed =now - @@start
+    @@elapsed_int="%d" % elapsed
+    render :partial => "progress", :locals => { :progress_int => @@test, :done_int =>@@done, :elapsed_int =>@@elapsed_int }
   end
 
   # DELETE /progress_webs/1
