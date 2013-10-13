@@ -1,3 +1,5 @@
+# Solution by Aydin Gungordu - www.aydingungordu.com
+
 def mergeSort(array)
 	if array==nil
 		return
