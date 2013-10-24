@@ -1,4 +1,4 @@
-# Solution by Aydin Gungordu - www.aydingungordu.com
+#Solution by Aydin Gungordu - www.aydingungordu.com
 
 def mergeSort(array)
 	if array==nil
